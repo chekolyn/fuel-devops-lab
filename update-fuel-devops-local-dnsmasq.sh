@@ -23,12 +23,12 @@ fi
 $DNS_SCRIPT > $TMP_FILE
 
 # Compare files:
-DIFF=$( diff -I '^# last update.*' $TMP_FILE $DNSMASQ_FILE )
-echo "Comparing tmp file $TMP_FILE with $DNSMASQ_FILE"
+DIFF=$( diff -I '^# last update.*' $DNSMASQ_FILE $TMP_FILE )
+echo "Comparing dnsmasq file: $DNSMASQ_FILE with tmp file: $TMP_FILE"
 if [ ! "${DIFF}" = "" ] ; then
 	echo "Update to dnsmasq file is needed"
 	echo "diff output:"
-	colordiff -I '^# last update.*' $TMP_FILE $DNSMASQ_FILE
+	colordiff -I '^# last update.*' $DNSMASQ_FILE $TMP_FILE
 	sudo mv $TMP_FILE $DNSMASQ_FILE
 	echo "Restarting dnsmasq to force updates"
 	sudo service dnsmasq force-reload
