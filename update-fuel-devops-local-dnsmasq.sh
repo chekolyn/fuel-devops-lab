@@ -15,8 +15,8 @@ if [ "$VIRTUAL_ENV" = "" ] ; then
         source /usr/local/bin/virtualenvwrapper.sh
 
         # Set python virtual envirionment:
-        workon fuel-devops-development-venv-2.9
-        export VENV_PATH=fuel-devops-development-venv-2.9
+        workon fuel-devops-venv-2.9
+        export VENV_PATH=fuel-devops-venv-2.9
 fi
 
 # Output tmp file
