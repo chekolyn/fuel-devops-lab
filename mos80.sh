@@ -18,11 +18,11 @@ fi
 export ENV_NAME=mos80			#YOUR ENV Name must be unique; also used in DNS
 export ISO_PATH=/home/sto/ISO/MirantisOpenStack-8.0.iso
 export NODE_COUNT=5
-export ADMIN_NODE_CPU=4
-export ADMIN_NODE_MEMORY=6144
+export ADMIN_NODE_CPU=1
+export ADMIN_NODE_MEMORY=2048
 export ADMIN_NODE_VOLUME_SIZE=75
-export SLAVE_NODE_CPU=4
-export SLAVE_NODE_MEMORY=4096
+export SLAVE_NODE_CPU=2
+export SLAVE_NODE_MEMORY=3072
 export INTERFACE_MODEL=virtio		#very important for performance
 export DRIVER_USE_HOST_CPU=False	#very important because with out VMs will hang
 
@@ -39,7 +39,7 @@ export DEFAULT_DOMAIN=${ENV_NAME}.${HOST_FQDN}
 # Networking:
 # Currentl fuel-devops ignores the forwarding rules;
 # a manual hack has been added to the code:
-# please see: https://mirantis.jira.com/wiki/display/2S/STO+Lab+with+fuel-devops#STOLabwithfuel-devops-codechanges
+# please look at the STO Lab documentation
 export FORWARD_DEFAULT=route		#currently not working
 export ADMIN_FORWARD=route		#currently not working
 export PUBLIC_FORWARD=route		#currently not working
@@ -64,11 +64,11 @@ ADMIN_SETUP="dos.py admin-setup-centos7 --admin-disk-size $ADMIN_NODE_VOLUME_SIZ
 if [[ $1 = "run" ]] ; then
     echo "*** Running mode ***"
     echo "Creating the env: $ENV_NAME"
-    #$ENV_CREATE
+    $ENV_CREATE
     echo "Setup of Admin node in env: $ENV_NAME"
-    #$ADMIN_SETUP
-    #echo "Checking for DNS changes:"
-    #$HOME/bin/update-fuel-devops-local-dnsmasq.sh
+    $ADMIN_SETUP
+    echo "Checking for DNS changes:"
+    ./update-fuel-devops-local-dnsmasq.sh
 else
     echo "*** DEMO MODE ***"
     echo "Add run at the end to run the dos.py commands:"    
